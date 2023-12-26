@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <title>Document</title>
+    <style>
+        :root {
+            --background-color: #F2F2F2;
+            --border-color: #CCCCCC;
+            --text-color: #333333;
+            --secondary-text-color: #666666;
+            --segment-background: #FFFFFF;
+            --checkbox-border: #999999;
+            --checkbox-checked-background: #3498db;
+            --checkbox-size: 12px;
+            --border-radius: 14px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            display: flex; /* Make container a flex container */
+        }
+
+        .services {
+            flex: 1; /* Allow section to grow and take remaining space */
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            border: 1px solid var(--border-color);
+            height: 90vh;
+            width: 250px;
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            overflow: hidden; /* Hide content overflow when collapsed */
+            transition: width 0.3s ease; /* Added width transition */
+        }
+
+        .ser-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 2px auto;
+            margin-bottom: 15px;
+            transition: padding 0.3s ease;
+        }
+
+        .ser-heading h4 {
+            margin: 0;
+            color: var(--text-color);
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap; /* Ensure text doesn't wrap to the next line */
+        }
+
+        .ser-heading i {
+            cursor: pointer;
+        }
+
+        .ser-segment {
+            width: 100%; /* Adjusted initial width */
+            padding: 10px;
+            transition: margin-left 0.3s ease, width 0.3s ease; /* Added width transition */
+            margin-left: -100%; /* Initially hide segment off-screen */
+        }
+
+        .ser-segment.show {
+            margin-left: 0;
+            width: 100%; /* Adjusted width to 100% when visible */
+        }
+
+        .ser-segment h4 {
+            margin: 5px 0;
+            color: var(--text-color);
+        }
+
+        .ser-segment ul {
+            background: var(--segment-background);
+            margin: 5px 0;
+            padding: 8px;
+            list-style-type: none;
+            border-radius: 10px;
+        }
+
+        .ser-segment ul li {
+            font-size: 14px;
+            display: flex;
+            color: var(--text-color);
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .ser-segment input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: var(--checkbox-size);
+            height: var(--checkbox-size);
+            border: 1.6px solid var(--checkbox-border);
+            border-radius: 50%;
+            margin-right: 8px;
+            background-color: transparent;
+        }
+
+        .ser-segment input[type="checkbox"]:checked {
+            background-color: var(--checkbox-checked-background);
+        }
+
+        .ser-segment label {
+            cursor: pointer;
+        }
+
+        .services #clearAll {
+            color: var(--secondary-text-color);
+            cursor: pointer;
+        }
+
+        .section-p1 {
+            flex: 1; /* Allow section to grow and take remaining space */
+            padding: 20px;
+            background-color: #e0e0e0;
+        }
+
+        .pro-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            gap: 20px;
+        }
+
+        .pro {
+            flex: 1; /* Allow item to grow and take remaining space */
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .car-imag {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .des {
+            margin-top: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        button p {
+            margin: 0;
+            margin-right: 10px;
+        }
+
+        svg {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="services" id="services">
+            <div class="ser-heading" onclick="toggleServices()">
+                <h4 class="ser-active" id="filter"><i class="bi bi-filter"></i>&nbsp;Filter</h4>
+                <h4 class="ser-active2" id="clearAll"><i class="bi bi-arrow-clockwise"></i>&nbsp;Clear all</h4>
+                <i class="bi bi-three-dots-vertical"></i>
+            </div>
+
+            <div class="ser-segment" id="segment">
+                <h4>Segment</h4>
+                <ul>
+                    <li><input type="checkbox" name="segment" id="muvCheckbox"> <label for="muvCheckbox">MUV</label></li>
+                    <li><input type="checkbox" name="segment" id="hatchbackCheckbox"> <label for="hatchbackCheckbox">Hatchback</label></li>
+                    <li><input type="checkbox" name="segment" id="sedanCheckbox"> <label for="sedanCheckbox">Sedan</label></li>
+                    <li><input type="checkbox" name="segment" id="suvCheckbox"> <label for="suvCheckbox">SUV</label></li>
+                </ul>
+            </div>
+
+            <!-- ... (Your existing code) ... -->
+
+        </section>
+
+        <section id="product1" class="section-p1">
+            <h2>Our Cars</h2>
+            <p style="font-size: 2rem;">We drive you safe and secure.</p>
+            <div class="pro-container">
+                <div class="pro">
+                    <img class="car-imag" src="car-img/Maruti-Suzuki-Ertiga.png" alt="">
+                    <div class="des">
+                        <span>Ertiga</span>
+                        <h5>Passengers : &nbsp; <p> 4</p>
+                        </h5>
+                        <h5>Luggage's: &nbsp;<p>2</p>
+                        </h5>
+                        <h5>Base Rate: &nbsp; <p>₹11/KM</p>
+                        </h5>
+                        <h5>350 km &nbsp;<p>/ 1 day (compulsory)</p>
+                        </h5>
+                        <h5>Extra: <p>Toll Tax, Police Entry, Parking, Driver .</p>
+                        </h5>
+                    </div>
+
+                    <button>
+                        <p>Book now</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-whatsapp" viewBox="0 0 16 16">
+                            <path
+                                d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
+                                </path>
+                            </svg>
+                    </button>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleServices() {
+            const segment = document.getElementById('segment');
+            const services = document.getElementById('services');
+
+            if (segment.style.marginLeft === '-100%') {
+                segment.style.marginLeft = '0';
+                services.style.width = '100%';
+            } else {
+                segment.style.marginLeft = '-100%';
+                services.style.width = '250px';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const clearAllButton = document.getElementById('clearAll');
+
+            clearAllButton.addEventListener('click', function () {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

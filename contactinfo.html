@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="x-icon" href="icon/PLANE.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshar Travels | Travels Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<style>
+    .inputGroup {
+        position: relative;
+        flex-basis: 100%;
+
+    }
+
+    .inputGroup input,
+    textarea {
+        width: 100%;
+    }
+
+    .input {
+        border: solid 1.5px var(--primary-txt-clr);
+        border-radius: 1rem;
+        background: none;
+        padding: 1rem;
+        font-size: 1rem;
+        color: var(--primary-txt-clr);
+        transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .user-label {
+        position: absolute;
+        left: 15px;
+        color: var(--primary-txt-clr);
+        pointer-events: none;
+        transform: translateY(1rem);
+        transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input:focus,
+    input:valid,
+    textarea :valid {
+        outline: none;
+        border: 1.5px solid #1a73e8;
+    }
+
+    .input:focus~label,
+    input:valid~label,
+    textarea :valid {
+        transform: translateY(-50%) scale(0.8);
+        background-color: var(--primary-bg-clr);
+        padding: 0 .2em;
+        color: #2196f3;
+    }
+
+
+
+
+
+
+    .button-wrapper-wrap {
+        z-index: 5;
+        flex: none;
+        transition: all 0.4s;
+        position: relative;
+        transform: translate(0);
+        --bg-color: #7289da;
+    }
+
+    .button {
+        z-index: 2;
+        grid-column-gap: 1.5rem;
+        color: black;
+        text-align: center;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        background-color: var(--bg-color);
+        border-radius: 20rem;
+        justify-content: center;
+        align-items: center;
+        padding: 1.1rem 0.75rem 1.1rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.4;
+        transition: all 0.4s;
+        display: flex;
+        position: relative;
+        transform: translate(0);
+    }
+
+    .button-wrapper.is-absolute {
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        padding: 0;
+        display: block;
+        position: absolute;
+        top: 0%;
+        bottom: 0%;
+        left: 0%;
+        right: 0%;
+    }
+
+    .button__texts {
+        z-index: 1;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .button__text-anim {
+        transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+        position: relative;
+        transform: translate(0);
+    }
+
+    .button__text.is-absolute {
+        position: absolute;
+        top: 0%;
+        bottom: 0%;
+        left: 0%;
+        right: 0%;
+        transform: translateY(150%);
+    }
+
+    .button__icons.is-white {
+        border-color: white;
+        background-color: white;
+        color: var(--bg-color);
+        position: relative;
+    }
+
+    .button__icons {
+        width: 2rem;
+        height: 2rem;
+        color: #fff;
+        background-color: var(--bg-color);
+        border: 0.125rem solid var(--bg-color);
+        border-radius: 50%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-top: -1rem;
+        margin-bottom: -1rem;
+        transition: all 0.4s;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+        transform: translate(0);
+    }
+
+    .button__icon-anim {
+        z-index: 1;
+        justify-content: center;
+        align-items: center;
+        font-size: 0;
+        transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+        display: flex;
+        position: relative;
+        transform: translate(0%);
+    }
+
+    .icon-small {
+        z-index: 2;
+        width: 1rem;
+        height: 1rem;
+        flex: none;
+        font-size: 0;
+        position: relative;
+    }
+
+    .icon-small.is-absolute {
+        position: absolute;
+        top: 0%;
+        bottom: 0%;
+        left: 0%;
+        right: 0%;
+        transform: translate(-180%);
+    }
+
+    .button__bg {
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        border-radius: 50%;
+        transition: all 0.3s;
+        position: absolute;
+        top: 0%;
+        bottom: 0%;
+        left: 0%;
+        right: 0%;
+        transform: scale(0);
+    }
+
+    .button-wrapper-wrap:hover .button__icons.is-white {
+        color: white;
+    }
+
+    .button-wrapper-wrap:hover .button__icon-anim {
+        transform: translate(180%);
+    }
+
+    .button-wrapper-wrap:hover .button__text-anim {
+        transform: translateY(-150%);
+    }
+
+    .button-wrapper-wrap:hover .button__bg {
+        transform: scale(1);
+    }
+</style>
+
+<body>
+
+    <section id="header" class="rounded-pill mx-2">
+
+        <h4><a href="index.html" style="padding: 0.5em;">Akshar Tours & Travels</a></h4>
+        <div class="navbar-wrapper rounded-start-pill">
+            <ul id="navbar" class="p-2">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Route.html">Route</a></li>
+                <li><a class="active" href="contactinfo.html">Contact</a></li>
+
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <div class="chatbot-container">
+        <div class="chatbot-logo-container">
+            <a href="https://api.whatsapp.com/send?phone=15550836681&text=Hey," class="chatbot-logo"><img
+                    src="/icon/whatsapp-6273368_1920.png" alt="Chatbot Logo" class="chatbot-logo"></a>
+        </div> </a>
+    </div>
+
+    <section class="contact-page">
+        <div class="contactUs">
+            <div class="title">
+                <h2>Get in Touch</h2>
+            </div>
+
+            <div class="box">
+                <div class="contact form rounded-4">
+                    <h3 class="text-center mb-5">Send a Message</h3>
+                    <form action="/sendmsg">
+                        <div class="formBox">
+                            <div class="row50">
+                                <div class="inputBox inputGroup">
+                                    <input required="" type="text" id="fisrtname" name="fisrtname" autocomplete="off"
+                                        class="input">
+                                    <label class="user-label">First Name</label>
+                                </div>
+                                <div class="inputBox inputGroup">
+                                    <input required="" type="text" id="lastname" name="lastname" autocomplete="off"
+                                        class="input">
+                                    <label class="user-label">Last Name</label>
+                                </div>
+                            </div>
+
+                            <div class="row50">
+                                <div class="inputBox inputGroup">
+                                    <input required="" type="text" id="email" name="email" autocomplete="off"
+                                        class="input">
+                                    <label class="user-label">Email</label>
+                                </div>
+                                <div class="inputBox inputGroup">
+                                    <input required="" type="text" name="phone" id="phone" autocomplete="off"
+                                        class="input">
+                                    <label class="user-label">Phone</label>
+                                </div>
+                            </div>
+
+                            <div class="row100">
+                                <div class="inputBox inputGroup">
+                                    <textarea style="resize: none;" rows="10" required="" type="text" name="address"
+                                        id="address" autocomplete="off" class="input"></textarea>
+                                    <label class="user-label">Address</label>
+                                </div>
+
+                            </div>
+
+                            <div class="row100">
+                                <div class="inputBox
+                                ">
+                                    <div data-hover="" class="button-wrapper-wrap">
+                                        <a href="#" class="button w-inline-block">
+                                            <div class="button__texts">
+                                                <div data-hover-elem="" class="button__text-anim">
+                                                    <div class="button__text is-absolute">Send</div>
+                                                    <div class="button__text">Send</div>
+                                                </div>
+                                            </div>
+                                            <div data-hover-elem="" class="button__icons is-white">
+                                                <div data-hover-elem="" class="button__icon-anim">
+                                                    <div class="icon-small w-embed ">
+                                                        <svg aria-hidden="true" role="img" fill="currentColor"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                            width="100%" height="100%">
+                                                            <path fill-rule="evenodd"
+                                                                d="M3.5 8a1 1 0 0 1 1-1h4a1 1 0 0 1 0 2h-4a1 1 0 0 1-1-1Z"
+                                                                clip-rule="evenodd"></path>
+                                                            <path fill-rule="evenodd"
+                                                                d="M14.216 6.693a1.494 1.494 0 0 1 0 2.615L3.664 15.222a1.5 1.5 0 0 1-2.148-1.823L3.447 8l-1.93-5.398A1.5 1.5 0 0 1 3.662.779l10.553 5.914ZM12.458 8 3.845 3.173l1.545 4.32c.119.328.119.687 0 1.015l-1.545 4.32L12.457 8Z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="icon-small is-absolute w-embed">
+                                                        <svg aria-hidden="true" role="img" fill="currentColor"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                            width="100%" height="100%">
+                                                            <path fill-rule="evenodd"
+                                                                d="M3.5 8a1 1 0 0 1 1-1h4a1 1 0 0 1 0 2h-4a1 1 0 0 1-1-1Z"
+                                                                clip-rule="evenodd"></path>
+                                                            <path fill-rule="evenodd"
+                                                                d="M14.216 6.693a1.494 1.494 0 0 1 0 2.615L3.664 15.222a1.5 1.5 0 0 1-2.148-1.823L3.447 8l-1.93-5.398A1.5 1.5 0 0 1 3.662.779l10.553 5.914ZM12.458 8 3.845 3.173l1.545 4.32c.119.328.119.687 0 1.015l-1.545 4.32L12.457 8Z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div data-hover-elem="" class="button__bg"></div>
+                                            </div>
+                                        </a><input type="submit" value="Submit" data-wait="Please wait..."
+                                            class="button-wrapper is-absolute w-button bg-blue-200" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="contact info rounded-4 shadow-4">
+                    <h3>Contact Info</h3>
+                    <div class="infoBox">
+                        <div>
+                            <span><i class="bi bi-geo-alt"></i></span>
+                            <p>Cannaught Place, Surat <br>INDIA </p>
+                        </div>
+                        <div>
+                            <span><i class="bi bi-envelope"></i></span>
+                            <a href="mailto:abcxyz@gmail.com">abcxyz@gmail.com</a>
+                        </div>
+                        <div>
+                            <span><i class="bi bi-telephone"></i></span>
+                            <a href="+91 123456 74185">+91 123456 74185</a>
+                        </div>
+
+                        <ul class="sci">
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-whatsapp"></i></a></li>
+                            <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                            <li><a href="#"><i class="bi bi-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="contact map shadow rounded-4 ">
+                    <iframe class="rounded-4 "
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.809736255357!2d72.90349277536087!3d21.239392080463208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be045f117464cbf%3A0x48842a1a06767429!2sVaracha%20Rd%2C%20Radhe%20Krishna%20Raw%20House%2C%20Nana%20Varachha%2C%20Surat%2C%20Gujarat%20395006!5e0!3m2!1sen!2sin!4v1700303978305!5m2!1sen!2sin"
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer Section -->
+    <footer class="py-5 container">
+        <div class="row">
+            <div class="col-md-5 mb-3">
+                <h5>Akshar Tours & Travels</h5>
+            </div>
+            <div class="col-6 col-md-2 mb-3 ml-auto">
+                <h5>Address</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">347 Vrunda Society, Surat
+                            395004</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+                <h5>Phone</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">+01 2222 365 /(+91) 01 2345
+                            6789</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+                <h5>Hours</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 ">
+                            10:00 AM - 18:00 PM IST, Mon - Sat
+                        </a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top w-100">
+            <p>© 2022 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3">
+                    <a href="https://www.facebook.com/" class="fab fa-facebook-f" target="_blank"></a>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a href="https://www.instagram.com/" class="fab fa-instagram" target="_blank"></a>
+                </li>
+                <li class="ms-3">
+                    <a href="https://twitter.com/explore" class="fab fa-twitter" target="_blank"></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to validate email using regex
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Function to validate phone number using regex
+        function validatePhone(phone) {
+            const phoneRegex = /^\+\d{1,3}\s\d{1,5}\s\d{1,10}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Add event listeners for validation
+        document.getElementById('emailInput').addEventListener('blur', function () {
+            const emailInput = this.value;
+            if (!validateEmail(emailInput)) {
+                alert('Please enter a valid email address.');
+                // You can also add visual cues, like changing the input border color, etc.
+            }
+        });
+
+        document.getElementById('phoneInput').addEventListener('blur', function () {
+            const phoneInput = this.value;
+            if (!validatePhone(phoneInput)) {
+                alert('Please enter a valid phone number.');
+                // You can also add visual cues, like changing the input border color, etc.
+            }
+        });
+
+        //         function sendmsg(event) {
+        //             event.preventDefault();
+
+        //             const mobileInput = document.getElementById("mobile");
+        //             const useridInput = document.getElementById("userid");
+        //             const usernameInput = document.getElementById("username");
+        //             const pickupInput = document.getElementById("pickup");
+        //             const dropInput = document.getElementById("drop");
+        //             const totalDaysInput = document.getElementById("totalDays");
+        //             const startkmInput = document.getElementById("startkm");
+        //             const carInput = document.getElementById("car");
+        //             const perKmPriceInput = document.getElementById("perKmPrice");
+        //             const driveridInput = document.getElementById('driverid');
+        //             const drivernameInput = document.getElementById('driverrname');
+        //             const drivermobileInput = document.getElementById('drivermobile');
+
+        //             const mobileNumber = "91" + mobileInput.value;
+        //             console.log(mobileNumber);
+        //             const userid = useridInput.value;
+        //             const username = usernameInput.value;
+        //             const mobile = mobileInput.value;
+        //             const pickup = pickupInput.value;
+        //             const drop = dropInput.value;
+        //             const totalDays = totalDaysInput.value;
+        //             const startkm = startkmInput.value;
+        //             const car = carInput.value;
+        //             const perKmPrice = perKmPriceInput.value;
+        //             const driverid = driveridInput.value;
+        //             const drivername = drivernameInput.value;
+        //             const drivermobile = drivermobileInput.value;
+
+        //             console.log(drivername + "jj");
+
+
+
+
+
+        //             const bodyText = `*Dear ${capitalizeFirstLetter(username)}*, thank you for choosing Akshar Tours and Travels for your car rental.
+        // Here are your reservation details:
+
+        // *🚗 Car Name:* ${capitalizeFirstLetter(carname)}
+        // *🪙 Rate Per KM(₹):* ${perKmPrice}
+        // *📅 Rental Period:*
+        //    *- Pickup:* ${formatDateTime(pickup)}
+        //    *- Drop:* ${formatDateTime(drop)}
+        //    *- Total Days:* ${totalDays}
+        // *👤 Driver Information:* ${capitalizeFirstLetter(drivername)}
+
+        // Feel free to contact us for any assistance. Safe Journey with Akshar Tours and Travels.`;
+
+        //             const messageData = {
+        //                 messaging_product: "whatsapp",
+        //                 to: mobileNumber,
+        //                 type: "text",
+        //                 text: {
+        //                     preview_url: false,
+        //                     body: bodyText,
+        //                 },
+        //             };
+
+        //             // Use fetch instead of XMLHttpRequest
+        //             return fetch("https://graph.facebook.com/v17.0/161493447052921/messages", {
+        //                 method: "POST",
+        //                 headers: {
+        //                     "Authorization": "Bearer EAAhZADG5K8rIBO7G0bHRqH921P53QZBRqdmHwdMJTHljBUIi4eGH0VYo7DjsZAatHdTFZAjnUHgTOZCZCMX4Q5bnCPHwZAtZCXjSileZBaJDcl07ZATSEUbASdx3DlekfcjJGtY1FkrEn4qZAWOvBHecZAvl3mfme45XOewjNXcKv7ejzO1Ud3voWxUWZCZB8fKROQiuZBnrNM5G9iBk1sZCog1iLZCaE79MXFUQZD",
+        //                     "Content-Type": "application/json",
+        //                 },
+        //                 body: JSON.stringify(messageData),
+        //             });
+
+        //         }
+
+    </script>
+</body>
+
+</html>
